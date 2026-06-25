@@ -5,52 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>神の託宣</title>
   <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #ffffff;
-      overflow: hidden;
-    }
-    
-    /* 130人のiPhoneで100%全画面に完璧にフィットさせる設定 */
+    body, html { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #ffffff; overflow: hidden; }
     .fullscreen-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-image: url('gate02.png');
-      background-size: cover;
-      background-position: center;
-      opacity: 0;
-      /* 2秒かけて神々しくフワァーっと浮かび上がらせます */
-      animation: divineFadeIn 2.0s ease-out forwards;
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background-image: url('gate02.png'); background-size: cover; background-position: center;
+      opacity: 0; animation: divineFadeIn 2.0s ease-out forwards;
     }
-
-    @keyframes divineFadeIn {
-      0% { opacity: 0; filter: blur(5px); }
-      100% { opacity: 1; filter: blur(0); }
-    }
+    @keyframes divineFadeIn { 0% { opacity: 0; filter: blur(5px); } 100% { opacity: 1; filter: blur(0); } }
   </style>
   <script>
     window.onload = function() {
-      // 1. URLから「?choice=A」などの投票データを自動で読み取る
       const urlParams = new URLSearchParams(window.location.search);
       const choice = urlParams.get('choice');
-      
       if (choice) {
-        // あなたの最新のGASのURLをあらかじめガチッと組み込んであります
-        const myGasUrl = "https://script.google.com/macros/s/AKfycbwLDXiM_u3HEyWQ6VSB05hutNWFqNaQgBrlcVfS_Jsutycykboya8K6P8zowbi7QeWo8Q/exec";
+        // ★ここに、さっきステップ2の最後にコピーした【あなたの最新のGASのURL】を上書きで貼り付けてください。
+        const myGasUrl = "https://script.google.com/macros/s/AKfycbwKOXx-7pigyzR4otdwyblwSrRdNlY5cSIyIGEFDFgOU-8hXMOyauDSszb1WopsBm34/exec";
         
-        // 連投テスト時のGoogleのサボり（キャッシュ）を100%防止する設定
         const cacheBuster = "&t=" + new Date().getTime();
-        const gasUrl = myGasUrl + "?choice=" + encodeURIComponent(choice) + cacheBuster;
-        
-        // 2. Googleに絶対にブロックされず、エラー画面も出さない最強の通信処理
         const img = new Image();
-        img.src = gasUrl;
+        img.src = myGasUrl + "?choice=" + encodeURIComponent(choice) + cacheBuster;
       }
     };
   </script>
