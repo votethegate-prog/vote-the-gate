@@ -13,36 +13,45 @@
       background-color: #ffffff;
       overflow: hidden;
     }
-    /* 130人のiPhoneで100%全画面にフィットさせる設定 */
+    
+    /* 130人のiPhoneで100%全画面に完璧にフィットさせる設定 */
     .fullscreen-bg {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background-image: url('gate02.png'); /* さっき上げた画像の名前 */
+      background-image: url('gate02.png'); /* あなたの美しい画像ファイル名 */
       background-size: cover;
       background-position: center;
       opacity: 0;
-      /* 2秒かけてフワァーっとフェードインします */
+      /* 2秒かけて神々しくフワァーっと浮かび上がらせます */
       animation: divineFadeIn 2.0s ease-out forwards;
     }
+
     @keyframes divineFadeIn {
-      0% { opacity: 0; filter: blur(5px); }
-      100% { opacity: 1; filter: blur(0); }
+      0% {
+        opacity: 0;
+        filter: blur(5px);
+      }
+      100% {
+        opacity: 1;
+        filter: blur(0);
+      }
     }
   </style>
   <script>
     window.onload = function() {
-      // 1. URLから「?choice=A」などの投票データを読み取る
+      // 1. URLから「?choice=A」などの投票データを自動で読み取る
       const urlParams = new URLSearchParams(window.location.search);
       const choice = urlParams.get('choice');
       
       if (choice) {
-        // 【超重要】ここに、あなたの「Google Apps Script（GAS）」の現在のウェブアプリURL（/execで終わるやつ）を貼り付けてください！
-        const gasUrl = "https://script.google.com/macros/s/AKfycbwLDXiM_u3HEyWQ6VSB05hutNWFqNaQgBrlcVfS_Jsutycykboya8K6P8zowbi7QeWo8Q/exec" + encodeURIComponent(choice);
+        // 👇 あなたのGASのURLをあらかじめ組み込みました！
+        const myGasUrl = "https://script.google.com/macros/s/AKfycbwLDXiM_u3HEyWQ6VSB05hutNWFqNaQgBrlcVfS_Jsutycykboya8K6P8zowbi7QeWo8Q/exec";
         
-        // 2. 【魔法の1行】お客様の画面には何も出さず、裏側だけでこっそりGASに1票を送信する
+        // 2. 自動で「?choice=A」の形に組み立てて、お客様の画面の裏側（背景）でGASに1票を爆速で送信する
+        const gasUrl = myGasUrl + "?choice=" + encodeURIComponent(choice);
         fetch(gasUrl, { mode: 'no-cors' });
       }
     };
