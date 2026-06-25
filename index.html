@@ -52,7 +52,7 @@
         
         // 2. 自動で「?choice=A」の形に組み立てて、お客様の画面の裏側（背景）でGASに1票を爆速で送信する
         const gasUrl = myGasUrl + "?choice=" + encodeURIComponent(choice);
-        fetch(gasUrl, { mode: 'no-cors' });
+        navigator.sendBeacon(gasUrl);
       }
     };
   </script>
