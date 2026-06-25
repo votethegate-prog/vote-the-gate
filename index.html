@@ -21,7 +21,7 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background-image: url('gate02.png'); /* あなたの美しい画像ファイル名 */
+      background-image: url('gate02.png');
       background-size: cover;
       background-position: center;
       opacity: 0;
@@ -30,14 +30,8 @@
     }
 
     @keyframes divineFadeIn {
-      0% {
-        opacity: 0;
-        filter: blur(5px);
-      }
-      100% {
-        opacity: 1;
-        filter: blur(0);
-      }
+      0% { opacity: 0; filter: blur(5px); }
+      100% { opacity: 1; filter: blur(0); }
     }
   </style>
   <script>
@@ -47,12 +41,16 @@
       const choice = urlParams.get('choice');
       
       if (choice) {
-        // 👇 あなたのGASのURLをあらかじめ組み込みました！
-        const myGasUrl = "https://script.google.com/macros/s/AKfycbwDOwTOpEmEm4P8PFVpsbmEJv43ydMvJ6ZBvlcxClWavo3FcbumDdz6sb1i1KyuSjVRNg/exec";
+        // あなたの最新のGASのURLをあらかじめガチッと組み込んであります
+        const myGasUrl = "https://script.google.com/macros/s/AKfycbwLDXiM_u3HEyWQ6VSB05hutNWFqNaQgBrlcVfS_Jsutycykboya8K6P8zowbi7QeWo8Q/exec";
         
-        // 2. 自動で「?choice=A」の形に組み立てて、お客様の画面の裏側（背景）でGASに1票を爆速で送信する
-        const gasUrl = myGasUrl + "?choice=" + encodeURIComponent(choice);
-        navigator.sendBeacon(gasUrl);
+        // 連投テスト時のGoogleのサボり（キャッシュ）を100%防止する設定
+        const cacheBuster = "&t=" + new Date().getTime();
+        const gasUrl = myGasUrl + "?choice=" + encodeURIComponent(choice) + cacheBuster;
+        
+        // 2. Googleに絶対にブロックされず、エラー画面も出さない最強の通信処理
+        const img = new Image();
+        img.src = gasUrl;
       }
     };
   </script>
