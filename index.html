@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>神の託宣</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #ffffff;
+      overflow: hidden;
+    }
+    /* 130人のiPhoneで100%全画面にフィットさせる設定 */
+    .fullscreen-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url('kami.jpg'); /* さっき上げた画像の名前 */
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      /* 2秒かけてフワァーっとフェードインします */
+      animation: divineFadeIn 2.0s ease-out forwards;
+    }
+    @keyframes divineFadeIn {
+      0% { opacity: 0; filter: blur(5px); }
+      100% { opacity: 1; filter: blur(0); }
+    }
+  </style>
+  <script>
+    window.onload = function() {
+      // 1. URLから「?choice=A」などの投票データを読み取る
+      const urlParams = new URLSearchParams(window.location.search);
+      const choice = urlParams.get('choice');
+      
+      if (choice) {
+        // 【超重要】ここに、あなたの「Google Apps Script（GAS）」の現在のウェブアプリURL（/execで終わるやつ）を貼り付けてください！
+        const gasUrl = "https://script.google.com/macros/s/AKfycbwLDXiM_u3HEyWQ6VSB05hutNWFqNaQgBrlcVfS_Jsutycykboya8K6P8zowbi7QeWo8Q/exec" + encodeURIComponent(choice);
+        
+        // 2. 【魔法の1行】お客様の画面には何も出さず、裏側だけでこっそりGASに1票を送信する
+        fetch(gasUrl, { mode: 'no-cors' });
+      }
+    };
+  </script>
+</head>
+<body>
+  <div class="fullscreen-bg"></div>
+</body>
+</html>
